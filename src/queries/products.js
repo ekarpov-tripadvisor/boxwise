@@ -1,5 +1,5 @@
 import React from "react";
-import { FirestoreCollection } from "react-firestore";
+import { FirestoreCollection, FirestoreDocument } from "react-firestore";
 import { firestore } from "../firebase";
 
 export const ProductsCollection = ({ organizationRef, ...props }) => (
@@ -13,3 +13,8 @@ export const ProductsCollection = ({ organizationRef, ...props }) => (
     {...props}
   />
 );
+
+export const Product = ({ id, ...props }) => {
+  console.log(id);
+  return <FirestoreDocument path={"products/" + id} {...props} />;
+};

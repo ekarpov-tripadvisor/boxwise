@@ -7,6 +7,7 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import IconButton from "@material-ui/core/IconButton";
+import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import ConfirmDeleteAlert from "./ConfirmDeleteAlert";
 
@@ -29,6 +30,7 @@ const ProductTable = ({
   classes,
   isLoading,
   products,
+  onEdit,
   onDelete,
   onCancelConfirmDelete,
   onConfirmDelete,
@@ -62,6 +64,12 @@ const ProductTable = ({
                   <TableCell padding="dense">{product.category}</TableCell>
                   <TableCell padding="dense">{product.name}</TableCell>
                   <TableCell padding="dense">
+                    <IconButton
+                      onClick={() => onEdit(product.id)}
+                      aria-label="Edit"
+                    >
+                      <EditIcon />
+                    </IconButton>
                     <IconButton
                       onClick={() => onDelete(product.id)}
                       aria-label="Delete"

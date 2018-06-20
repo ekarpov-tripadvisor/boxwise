@@ -20,13 +20,15 @@ function Transition(props) {
   return <Slide direction="up" {...props} />;
 }
 
-const AddProductDialog = ({
+const ProductDialog = ({
   classes,
   firestore,
   open,
   fullScreen,
   onClose,
-  onSubmit
+  title,
+  onSubmit,
+  values
 }) => (
   <Dialog
     className={classes.root}
@@ -38,10 +40,7 @@ const AddProductDialog = ({
     TransitionComponent={Transition}
   >
     <Formik
-      initialValues={{
-        category: "",
-        name: ""
-      }}
+      initialValues={values}
       validate={values => {
         let errors = {};
         if (!values.category) {
@@ -62,7 +61,7 @@ const AddProductDialog = ({
       }) => (
         <form onSubmit={handleSubmit}>
           <DialogToolbar
-            title="Add Product"
+            title={title}
             onClose={onClose}
             buttonText="Done"
             buttonIsLoading={isSubmitting}
@@ -110,14 +109,22 @@ const AddProductDialog = ({
   </Dialog>
 );
 
-AddProductDialog.propTypes = {
+ProductDialog.propTypes = {
   classes: PropTypes.object.isRequired,
   open: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
-  fullScreen: PropTypes.bool.isRequired
+  fullScreen: PropTypes.bool.isRequired,
+  values: PropTypes.object
+};
+
+ProductDialog.defaultProps = {
+  values: {
+    category: "",
+    name: ""
+  }
 };
 
 export default compose(
   withStyles(styles),
   withMobileDialog()
-)(AddProductDialog);
+)(ProductDialog);

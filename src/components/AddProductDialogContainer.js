@@ -1,11 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
-import AddProductDialog from "./AddProductDialog";
+import ProductDialog from "./ProductDialog";
 import firebase from "../firebase";
 import { handleError } from "../utils";
 
 const AddProductDialogContainer = ({ onClose, profile, ...props }) => (
-  <AddProductDialog
+  <ProductDialog
+    title="Add Product"
     onSubmit={values => {
       const firestore = firebase.firestore();
       values.organization = firestore.doc(profile.data.organization.ref);
